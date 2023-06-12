@@ -1,0 +1,40 @@
+.etch {
+    height: 750px;
+    width: 750px;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.buttonContainer {
+    width: 300px;
+
+}
+
+.lildiv:hover {
+    background-color: black;
+}
+
+body {
+    display: flex;
+    height: 100%;
+
+}
+
+html {
+    height: 100%;
+}
+
+button {
+    display: block;
+    margin: 50px auto;
+    width: 150px;
+}
+
