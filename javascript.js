@@ -4,6 +4,7 @@ let isMouseDown = false;
 let color = "#000000"
 let eraser = false;
 let rainbow = false;
+let opacityOn = false;
 document.querySelector('label').innerText = `${size} x ${size}`;
 document.querySelector('.hoverClick').innerText = "Hover";
 document.querySelector('.hoverClick').addEventListener('click', (e)=>{
@@ -27,23 +28,33 @@ function creategrid () {
       div.className = "square";
       div.style.cssText = `width:${750/size}px;height:${750/size}px`;
       div.addEventListener('mouseover', (e)=>{
+         if (opacityOn && !click) {
+           let tempOpacity = Number(e.target.style.opacity);
+           tempOpacity += 0.1;
+           e.target.style.opacity = tempOpacity;
+         };
          if (!click && !eraser && !rainbow) {
          e.target.classList.add("activeSquare");
          e.target.style.backgroundColor = color;
          } else if (!click && eraser) {
             e.target.style.backgroundColor = "white";
          } else if (!click && rainbow) {
-            e.target.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%`;
+            e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
       });
       div.addEventListener('mouseover', (e)=>{
+         if (opacityOn && click && isMouseDown) {
+            let tempOpacity = Number(e.target.style.opacity);
+           tempOpacity += 0.1;
+           e.target.style.opacity = tempOpacity; 
+         };
          if (click && isMouseDown && !eraser && !rainbow) {
             e.target.classList.add("activeSquare");
             e.target.style.backgroundColor = color;
          } else if (click && isMouseDown && eraser) {
             e.target.style.backgroundColor = "white";
          } else if (click && isMouseDown && rainbow) {
-            e.target.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%`;
+            e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
       });
       div.draggable=false;
@@ -94,21 +105,28 @@ document.querySelector('#rainbow').addEventListener('click', (e) => {
       e.target.style.backgroundColor="grey";
       eraser = false;
       document.querySelector('#eraser').style.backgroundColor="initial";
+      opacityOn = false;
+      document.querySelector('#shader').style.backgroundColor="initial";
+   }
+});
+
+document.querySelector('#shader').addEventListener('click', (e) => {
+   if (opacityOn) {
+      opacityOn = false;
+      e.target.style.backgroundColor="initial";     
+   } else {
+      opacityOn = true;
+      e.target.style.backgroundColor="grey";
+      rainbow = false;
+      document.querySelector('#rainbow').style.backgroundColor="initial";
    }
 });
 
 /*
 
 TO IMPLEMENT: 
-   pretty css obvs
-  DONE color picker 
-   darkening mode
-  DONE clear
-  DONE eraser
-  DONE rainbow mode
-   DONE hover / click mode 
 
-   bugs: why does 'initial' not set button background color back to, uh, the initial?
+   bugs: why does 'initial' not set button background color back to, uh, the initial? can simply set to actual background color instead
 
 
 */

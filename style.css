@@ -30,7 +30,7 @@ html {
     height: 100%;
 }
 
-button {
+button, #colorPicker, #etchSize, label {
     display: block;
     margin: 50px auto;
     width: 150px;
@@ -38,4 +38,9 @@ button {
 
 #colorPicker {
     border-radius: 50px;
+    
+}
+
+label {
+    margin: -40px auto 50px;
 }
