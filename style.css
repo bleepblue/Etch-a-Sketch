@@ -18,9 +18,7 @@
 
 }
 
-.lildiv:hover {
-    background-color: black;
-}
+
 
 body {
     display: flex;
@@ -38,3 +36,6 @@ button {
     width: 150px;
 }
 
+#colorPicker {
+    border-radius: 50px;
+}
