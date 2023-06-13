@@ -175,7 +175,7 @@ document.querySelector('#colorMode').addEventListener('click', (e)=>{
 /*
 
 TO IMPLEMENT: 
-   bug: dragging still fucked
+   bug: dragging still fucked - add eventlisteners on the wee divs for dragstart and dragover. also make sure that ismousedown ends after the dragging finishes.
    eraser should remove 'active square' class
    add eraser shading
 DONE   hover / code - one enlarges and emboldens when active
