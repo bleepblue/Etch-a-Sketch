@@ -5,18 +5,21 @@ let color = "#000000"
 let eraser = false;
 let rainbow = false;
 let opacityOn = false;
+let colorMode = true;
+document.querySelector('#colorMode').style.backgroundColor="grey";
+document.querySelector('.hover').style.cssText="font-weight:bold;font-size:30px";
 document.querySelector('label').innerText = `${size} x ${size}`;
-document.querySelector('.hoverClick').innerText = "Hover";
 document.querySelector('.hoverClick').addEventListener('click', (e)=>{
    if (click) {
-      document.querySelector('.hoverClick').innerText = "Hover";
+      document.querySelector('.click').style.cssText="";
+      document.querySelector('.hover').style.cssText="font-weight:bold;font-size:32px";
       click = false;
    } else {
-      document.querySelector('.hoverClick').innerText = "Click";
+      document.querySelector('.hover').style.cssText="";
+      document.querySelector('.click').style.cssText="font-weight:bold;font-size:32px";
       click = true;
    }
 });
-console.log(Math.random())
 creategrid();
 
 function creategrid () {
@@ -57,6 +60,21 @@ function creategrid () {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
       });
+      div.addEventListener('mousedown', (e)=>{
+         if (opacityOn && click) {
+            let tempOpacity = Number(e.target.style.opacity);
+           tempOpacity += 0.1;
+           e.target.style.opacity = tempOpacity; 
+         };
+         if (click && !eraser && !rainbow) {
+            e.target.classList.add("activeSquare");
+            e.target.style.backgroundColor = color;
+         } else if (click && eraser) {
+            e.target.style.backgroundColor = "white";
+         } else if (click && rainbow) {
+            e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
+         }
+      });
       div.draggable=false;
       frag.appendChild(div);
    };
@@ -80,6 +98,13 @@ window.addEventListener('mouseup', ()=>{
 
 document.querySelector('#colorPicker').addEventListener('input', (e)=>{
    color = e.target.value;
+   colorMode = true;
+   document.querySelector('#colorMode').style.backgroundColor="grey";
+   eraser = false;
+   document.querySelector('#eraser').style.backgroundColor="white";
+   rainbow = false;
+   document.querySelector('#rainbow').style.backgroundColor="white";
+
 });
 
 document.querySelector('#clear').addEventListener('click',creategrid);
@@ -88,18 +113,23 @@ document.querySelector('#eraser').addEventListener('click', (e)=>{
    if (eraser) {
       eraser = false;
       e.target.style.backgroundColor="initial";
+      colorMode = true;
    } else {
       eraser = true;
       e.target.style.backgroundColor="grey";
       rainbow = false;
       document.querySelector('#rainbow').style.backgroundColor="initial";
+      colorMode = false;
+      document.querySelector('#colorMode').style.backgroundColor="white";
+
    }
 });
 
 document.querySelector('#rainbow').addEventListener('click', (e) => {
    if (rainbow) {
       rainbow = false;
-      e.target.style.backgroundColor="initial";     
+      e.target.style.backgroundColor="initial"; 
+      colorMode = true;    
    } else {
       rainbow = true;
       e.target.style.backgroundColor="grey";
@@ -107,6 +137,8 @@ document.querySelector('#rainbow').addEventListener('click', (e) => {
       document.querySelector('#eraser').style.backgroundColor="initial";
       opacityOn = false;
       document.querySelector('#shader').style.backgroundColor="initial";
+      colorMode = false;
+      document.querySelector('#colorMode').style.backgroundColor="white";
    }
 });
 
@@ -119,14 +151,35 @@ document.querySelector('#shader').addEventListener('click', (e) => {
       e.target.style.backgroundColor="grey";
       rainbow = false;
       document.querySelector('#rainbow').style.backgroundColor="initial";
+      if (!eraser) {
+         colorMode = true;
+         document.querySelector('#colorMode').style.backgroundColor="grey";
+         
+      }
+   }
+});
+
+document.querySelector('#colorMode').addEventListener('click', (e)=>{
+   if (!colorMode) {
+      colorMode = true;
+      eraser = false;
+      document.querySelector('#eraser').style.backgroundColor="white";
+      rainbow = false; 
+      document.querySelector('#rainbow').style.backgroundColor="white";
+      e.target.style.backgroundColor="grey";
+      
+
    }
 });
 
 /*
 
 TO IMPLEMENT: 
-
+   bug: dragging still fucked
+   eraser should remove 'active square' class
+   add eraser shading
+DONE   hover / code - one enlarges and emboldens when active
    bugs: why does 'initial' not set button background color back to, uh, the initial? can simply set to actual background color instead
-
+   can streamline code mayhaps
 
 */

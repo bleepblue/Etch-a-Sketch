@@ -1,3 +1,59 @@
+
+
+html {
+    height: 100%;
+}
+
+
+body {
+    display: flex;
+    height: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+.settings {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+input#colorPicker {
+    border-radius: 5%;
+    height:45px;
+    width:45px;
+    box-sizing: content-box;
+    padding: 0;
+ 
+}
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+
+}
+
+h1 {
+    margin-left: 100px;
+}
+
+
 .etch {
     height: 750px;
     width: 750px;
@@ -6,41 +62,19 @@
     flex-wrap: wrap;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
-
-.buttonContainer {
-    width: 300px;
-
-}
 
 
 
-body {
-    display: flex;
-    height: 100%;
+
+
+
+
+
+button {
+    font-size: 30px;
+    width: 200px;
+    height: 46px;
+    border-radius: 25px;
 
 }
 
-html {
-    height: 100%;
-}
-
-button, #colorPicker, #etchSize, label {
-    display: block;
-    margin: 50px auto;
-    width: 150px;
-}
-
-#colorPicker {
-    border-radius: 50px;
-    
-}
-
-label {
-    margin: -40px auto 50px;
-}
