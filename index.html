@@ -8,25 +8,30 @@
     </head>
     <body draggable="false">
 
+        <h1>Etch-a-Sketch</h1>
+<div class="main-container">
         <div class="settings">
-            <h2>Settings</h2>
+            
+            <div class="colorContainer">
+            <button id="colorMode"><label class="colorLabel" for="colorPicker">Color</label></button>
             <input type="color" id="colorPicker">
-            <button id="colorMode">Color</button>
+            </div>
             <button id="clear">Clear</button>
             <button id="eraser">Eraser</button>
             <button class="hoverClick"><span class="hover">Hover</span> / <span class="click">Click</span></button>
             <button id="rainbow">Rainbow</button>
             <button id="shader">Shading</button>
             <input id="etchSize" type="range" min="1" max="64" value="16">
-            <label for="etchSize"></label>
+            <label class="sizing" for="etchSize"></label>
+            
         </div>
         <div class="container" draggable="false">
-            <h1>Etch-a-Sketch</h1>
+            
             <div class="etch" draggable="false"></div>
 
         </div>
 
-
+    </div>
 
     </body>
 </html>

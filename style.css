@@ -6,28 +6,35 @@ html {
 
 
 body {
-    display: flex;
+
     height: 100%;
     font-family: Helvetica, Arial, sans-serif;
+    background-image: linear-gradient(to right, rgb(175 173 173), rgb(255 255 255 / 0%));
+}
 
+.main-container {
+    display: flex;
 }
 
 .settings {
     width: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
+    padding-top:55px;
+    
 
 }
 
 input#colorPicker {
-    border-radius: 5%;
-    height:45px;
-    width:45px;
+    border-radius: 5px;
+    height:40px;
+    width:40px;
     box-sizing: content-box;
     padding: 0;
+    visibility: hidden;
  
 }
 
@@ -43,14 +50,10 @@ input#colorPicker {
     
 }
 
-h1, h2 {
-    margin: 0;
-    padding: 0;
-
-}
 
 h1 {
-    margin-left: 100px;
+    margin: 70px 400px 0;
+    font-size: 66px;
 }
 
 
@@ -60,6 +63,7 @@ h1 {
     border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
 }
 
 
@@ -74,7 +78,42 @@ button {
     font-size: 30px;
     width: 200px;
     height: 46px;
-    border-radius: 25px;
+    border-radius: 15px;
+    background-color: #e3e3e3;
 
 }
 
+
+
+
+.colorContainer {
+    display: flex;
+    width: 100%;
+    gap:20px
+}
+
+
+
+
+#colorMode {
+    margin-left:100px;
+    padding:3px 0 0 0;
+}
+
+input[type=range] {
+    width:200px;
+  
+}
+
+.colorLabel {
+    display: block;
+    height: 100%;
+    width: 100%;
+   border-radius:15px;
+   
+}
+
+.sizing {
+    margin-top: -15px;
+    font-size: 20px;
+}

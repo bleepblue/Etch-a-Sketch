@@ -6,9 +6,10 @@ let eraser = false;
 let rainbow = false;
 let opacityOn = false;
 let colorMode = true;
-document.querySelector('#colorMode').style.backgroundColor="grey";
+document.querySelector('#colorMode').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
+document.querySelector('.colorLabel').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
 document.querySelector('.hover').style.cssText="font-weight:bold;font-size:30px";
-document.querySelector('label').innerText = `${size} x ${size}`;
+document.querySelector('.sizing').innerText = `${size} x ${size}`;
 document.querySelector('.hoverClick').addEventListener('click', (e)=>{
    if (click) {
       document.querySelector('.click').style.cssText="";
@@ -39,8 +40,10 @@ function creategrid () {
          if (!click && !eraser && !rainbow) {
          e.target.classList.add("activeSquare");
          e.target.style.backgroundColor = color;
+         if (!opacityOn) {e.target.style.opacity = 1};
          } else if (!click && eraser) {
             e.target.style.backgroundColor = "white";
+            e.target.style.opacity = 0;
          } else if (!click && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
@@ -54,8 +57,10 @@ function creategrid () {
          if (click && isMouseDown && !eraser && !rainbow) {
             e.target.classList.add("activeSquare");
             e.target.style.backgroundColor = color;
+            if (!opacityOn) {e.target.style.opacity = 1};
          } else if (click && isMouseDown && eraser) {
             e.target.style.backgroundColor = "white";
+            e.target.style.opacity = 0;
          } else if (click && isMouseDown && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
@@ -69,8 +74,10 @@ function creategrid () {
          if (click && !eraser && !rainbow) {
             e.target.classList.add("activeSquare");
             e.target.style.backgroundColor = color;
+            if (!opacityOn) {e.target.style.opacity = 1};
          } else if (click && eraser) {
             e.target.style.backgroundColor = "white";
+            e.target.style.opacity = 0;
          } else if (click && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
          }
@@ -84,7 +91,7 @@ function creategrid () {
 
 document.querySelector('#etchSize').addEventListener('input', (e)=>{
    size = e.target.value;
-   document.querySelector('label').innerText = `${size} x ${size}`;
+   document.querySelector('.sizing').innerText = `${size} x ${size}`;
    creategrid();
 });
 
@@ -99,11 +106,12 @@ window.addEventListener('mouseup', ()=>{
 document.querySelector('#colorPicker').addEventListener('input', (e)=>{
    color = e.target.value;
    colorMode = true;
-   document.querySelector('#colorMode').style.backgroundColor="grey";
+   document.querySelector('#colorMode').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
+   document.querySelector('.colorLabel').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
    eraser = false;
-   document.querySelector('#eraser').style.backgroundColor="white";
+   document.querySelector('#eraser').style.backgroundColor="#e3e3e3";
    rainbow = false;
-   document.querySelector('#rainbow').style.backgroundColor="white";
+   document.querySelector('#rainbow').style.backgroundColor="#e3e3e3";
 
 });
 
@@ -112,15 +120,16 @@ document.querySelector('#clear').addEventListener('click',creategrid);
 document.querySelector('#eraser').addEventListener('click', (e)=>{
    if (eraser) {
       eraser = false;
-      e.target.style.backgroundColor="initial";
+      e.target.style.backgroundColor="#e3e3e3";
       colorMode = true;
    } else {
       eraser = true;
-      e.target.style.backgroundColor="grey";
+      e.target.style.backgroundColor="#b3b3b3";
       rainbow = false;
-      document.querySelector('#rainbow').style.backgroundColor="initial";
+      document.querySelector('#rainbow').style.backgroundColor="#e3e3e3";
       colorMode = false;
-      document.querySelector('#colorMode').style.backgroundColor="white";
+      document.querySelector('#colorMode').style.cssText="#e3e3e3";
+      document.querySelector('.colorLabel').style.cssText="#e3e3e3";
 
    }
 });
@@ -128,32 +137,34 @@ document.querySelector('#eraser').addEventListener('click', (e)=>{
 document.querySelector('#rainbow').addEventListener('click', (e) => {
    if (rainbow) {
       rainbow = false;
-      e.target.style.backgroundColor="initial"; 
+      e.target.style.backgroundColor="#e3e3e3"; 
       colorMode = true;    
    } else {
       rainbow = true;
-      e.target.style.backgroundColor="grey";
+      e.target.style.backgroundColor="#b3b3b3";
       eraser = false;
-      document.querySelector('#eraser').style.backgroundColor="initial";
+      document.querySelector('#eraser').style.backgroundColor="#e3e3e3";
       opacityOn = false;
-      document.querySelector('#shader').style.backgroundColor="initial";
+      document.querySelector('#shader').style.backgroundColor="#e3e3e3";
       colorMode = false;
-      document.querySelector('#colorMode').style.backgroundColor="white";
+      document.querySelector('#colorMode').style.cssText="#e3e3e3";
+      document.querySelector('.colorLabel').style.cssText="#e3e3e3";
    }
 });
 
 document.querySelector('#shader').addEventListener('click', (e) => {
    if (opacityOn) {
       opacityOn = false;
-      e.target.style.backgroundColor="initial";     
+      e.target.style.backgroundColor="#e3e3e3";     
    } else {
       opacityOn = true;
-      e.target.style.backgroundColor="grey";
+      e.target.style.backgroundColor="#b3b3b3";
       rainbow = false;
-      document.querySelector('#rainbow').style.backgroundColor="initial";
+      document.querySelector('#rainbow').style.backgroundColor="#e3e3e3";
       if (!eraser) {
          colorMode = true;
-         document.querySelector('#colorMode').style.backgroundColor="grey";
+         document.querySelector('#colorMode').style.backgroundColor="#b3b3b3";
+         
          
       }
    }
@@ -163,14 +174,17 @@ document.querySelector('#colorMode').addEventListener('click', (e)=>{
    if (!colorMode) {
       colorMode = true;
       eraser = false;
-      document.querySelector('#eraser').style.backgroundColor="white";
+      document.querySelector('#eraser').style.backgroundColor="#e3e3e3";
       rainbow = false; 
-      document.querySelector('#rainbow').style.backgroundColor="white";
-      e.target.style.backgroundColor="grey";
+      document.querySelector('#rainbow').style.backgroundColor="#e3e3e3";
+      document.querySelector('#colorMode').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
+      document.querySelector('.colorLabel').style.cssText = `background-image: linear-gradient(to right, ${color}, white)`;
+      
       
 
    }
 });
+
 
 /*
 
@@ -179,7 +193,7 @@ TO IMPLEMENT:
    eraser should remove 'active square' class
    add eraser shading
 DONE   hover / code - one enlarges and emboldens when active
-   bugs: why does 'initial' not set button background color back to, uh, the initial? can simply set to actual background color instead
+   
    can streamline code mayhaps
 
 */
