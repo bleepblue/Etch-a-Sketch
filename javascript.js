@@ -46,6 +46,7 @@ function creategrid () {
             e.target.style.opacity = 0;
          } else if (!click && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
+            e.target.style.opacity = 1;
          }
       });
       div.addEventListener('mouseover', (e)=>{
@@ -63,6 +64,7 @@ function creategrid () {
             e.target.style.opacity = 0;
          } else if (click && isMouseDown && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
+            e.target.style.opacity = 1;
          }
       });
       div.addEventListener('mousedown', (e)=>{
@@ -80,6 +82,7 @@ function creategrid () {
             e.target.style.opacity = 0;
          } else if (click && rainbow) {
             e.target.style.backgroundColor = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 1`;
+            e.target.style.opacity = 1;
          }
       });
       div.draggable=false;
@@ -190,9 +193,11 @@ document.querySelector('#colorMode').addEventListener('click', (e)=>{
 
 TO IMPLEMENT: 
    bug: dragging still fucked - add eventlisteners on the wee divs for dragstart and dragover. also make sure that ismousedown ends after the dragging finishes.
-   eraser should remove 'active square' class
+   eraser should remove 'active square' class 
+   --- actually, just get rid of the active square class alltogether
    add eraser shading
 DONE   hover / code - one enlarges and emboldens when active
+   BUG: when shading in a different colour to an already placed colour, the new colour defaults to opacity:1 instead of starting from nothing.
    
    can streamline code mayhaps
 
